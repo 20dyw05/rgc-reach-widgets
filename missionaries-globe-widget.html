@@ -16,30 +16,56 @@
       height: 580px;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 6px 32px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.25);
     }
 
     #map { width: 100%; height: 100%; }
 
     /* Section divider above map */
+    body {
+      background: linear-gradient(160deg, #2e8fa0 0%, #1d7080 100%);
+      padding: 2rem 2.5rem 2.5rem;
+    }
+
     .section-divider {
       display: flex;
       align-items: center;
       gap: 1.25rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
     }
     .section-divider::before,
     .section-divider::after {
-      content: ''; flex: 1; height: 1.5px; background: #c8c8c8;
+      content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.3);
     }
     .section-divider span {
       font-family: Georgia, serif;
       font-size: 17px;
       font-weight: 400;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #666;
+      color: rgba(255,255,255,0.9);
       white-space: nowrap;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.15);
+    }
+
+    .missionaries-intro {
+      text-align: center;
+      margin-bottom: 1.75rem;
+    }
+    .missionaries-intro h2 {
+      font-family: Georgia, serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+    .missionaries-intro p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.75;
+      max-width: 680px;
+      margin: 0 auto;
     }
 
     /* Count badge */
@@ -59,7 +85,7 @@
       z-index: 2;
       backdrop-filter: blur(6px);
       white-space: nowrap;
-      box-shadow: 0 2px 16px rgba(240,112,48,0.15), 0 1px 4px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 16px rgba(240,112,48,0.2), 0 1px 6px rgba(0,0,0,0.12);
     }
     .badge-number {
       font-family: Georgia, serif;
@@ -157,6 +183,11 @@
 
   <div class="section-divider"><span>Missionaries</span></div>
 
+  <div class="missionaries-intro">
+    <h2>We currently support 20+ missionaries all throughout the world!</h2>
+    <p>Our vision at RGC is to know and be involved in what God is doing in as many parts of the world as possible. We pray for our missionaries regularly through Missions Matters, following up to know how we can be praying specifically for them. Paul's ambition in Romans 15 is to preach Christ where He has not been named — and we want to pray for that same bold advance.</p>
+  </div>
+
   <div id="map-wrap">
     <div id="map"></div>
     <div id="count-badge"><span class="badge-number">20+</span> <span class="badge-label">Missionaries Worldwide</span> <span class="badge-divider">·</span> <span class="badge-cta">click a pin to learn more</span></div>
@@ -196,6 +227,27 @@
       attributionControl: false
     });
 
+    // Countries where RGC has missionaries
+    const missionaryCountries = [
+      'UA', // Ukraine
+      'NZ', // New Zealand
+      'MG', // Madagascar
+      'IL', // Israel
+      'ZA', // South Africa
+      'US', // USA
+      'DK', // Denmark
+      'EG', // Egypt
+      'NO', // Norway
+      'PH', // Philippines
+      'MX', // Mexico
+      'CH', // Switzerland
+      'CZ', // Czech Republic
+      'HU', // Hungary
+      'FR', // France
+      'RO', // Romania
+      'SV', // El Salvador
+    ];
+
     map.addControl(new mapboxgl.AttributionControl({ compact: true }));
     map.scrollZoom.enable();
     map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
@@ -208,6 +260,37 @@
         'space-color': 'rgb(200, 220, 255)',
         'star-intensity': 0.15
       });
+
+      // Highlight missionary countries in navy
+      map.addSource('countries', {
+        type: 'vector',
+        url: 'mapbox://mapbox.country-boundaries-v1'
+      });
+
+      map.addLayer({
+        id: 'missionary-countries',
+        type: 'fill',
+        source: 'countries',
+        'source-layer': 'country_boundaries',
+        paint: {
+          'fill-color': '#1a3f6e',
+          'fill-opacity': 0.35
+        },
+        filter: ['in', 'iso_3166_1', ...missionaryCountries]
+      }, 'admin-0-boundary');
+
+      map.addLayer({
+        id: 'missionary-countries-border',
+        type: 'line',
+        source: 'countries',
+        'source-layer': 'country_boundaries',
+        paint: {
+          'line-color': '#1a3f6e',
+          'line-width': 1,
+          'line-opacity': 0.5
+        },
+        filter: ['in', 'iso_3166_1', ...missionaryCountries]
+      }, 'admin-0-boundary');
     });
 
     map.on('load', () => {
