@@ -189,11 +189,8 @@
 
     map.on('load', () => {
       missionaries.forEach((m, i) => {
-        const el = document.createElement('div');
-        el.className = 'missionary-pin';
-
         const popup = new mapboxgl.Popup({
-          offset: 14,
+          offset: 25,
           closeButton: true,
           maxWidth: '230px'
         }).setHTML(`
@@ -207,7 +204,7 @@
           </div>
         `);
 
-        new mapboxgl.Marker(el)
+        new mapboxgl.Marker({ color: '#f07030' })
           .setLngLat([m.lng, m.lat])
           .setPopup(popup)
           .addTo(map);
