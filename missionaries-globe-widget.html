@@ -48,17 +48,40 @@
       bottom: 16px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(255,255,255,0.92);
+      background: rgba(255,255,255,0.94);
       border: 1px solid #e0e0e0;
-      border-radius: 20px;
-      padding: 6px 18px;
+      border-radius: 24px;
+      padding: 8px 20px;
       font-size: 13px;
       color: #555;
       font-family: Georgia, serif;
       letter-spacing: 0.04em;
       z-index: 2;
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(6px);
       white-space: nowrap;
+      box-shadow: 0 2px 16px rgba(240,112,48,0.15), 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .badge-number {
+      font-family: Georgia, serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: #f07030;
+      text-shadow: 0 0 12px rgba(240,112,48,0.4);
+    }
+    .badge-label {
+      font-size: 13px;
+      color: #333;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+    .badge-divider {
+      color: #ccc;
+      margin: 0 4px;
+    }
+    .badge-cta {
+      font-size: 12px;
+      color: #888;
+      font-style: italic;
     }
 
     /* Custom pin */
@@ -136,22 +159,22 @@
 
   <div id="map-wrap">
     <div id="map"></div>
-    <div id="count-badge">20+ Missionaries Worldwide — click a pin to learn more</div>
+    <div id="count-badge"><span class="badge-number">20+</span> <span class="badge-label">Missionaries Worldwide</span> <span class="badge-divider">·</span> <span class="badge-cta">click a pin to learn more</span></div>
   </div>
 
   <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiMjBkeXcwNSIsImEiOiJjbXBxMGN3aW0wazFoMnFwcWtqYmdhZDVtIn0.7XRZpY687LoOp35dNOSmMw';
 
     const missionaries = [
-      { name: "Greg & Hue Chon White",      ministry: "Medical Outreach",                       location: "Kyiv, Ukraine",              lat: 50.45,  lng: 30.52   },
+      { name: "Greg & Hue Chon White",      ministry: "Medical Outreach",                       location: "Ukraine",              lat: 50.45,  lng: 30.52   },
       { name: "Pink & Selena Davis",         ministry: "Elder, NZ Bible Centre",                 location: "Wellington, New Zealand",    lat: -41.28, lng: 174.78  },
       { name: "David & Ashley Ellingson",   ministry: "Leadership Training, Madagascar 3M",     location: "Madagascar",                 lat: -18.91, lng: 47.54   },
-      { name: "Aleksey & Alla Raikhstadt",  ministry: "Pastor, Beit Immanuel",                  location: "Tel Aviv, Israel",           lat: 32.08,  lng: 34.78   },
+      { name: "Aleksey & Alla Raikhstadt",  ministry: "Pastor, Beit Immanuel",                  location: "Israel",           lat: 32.08,  lng: 34.78   },
       { name: "Arthur & Olga Alard",        ministry: "Dean, IBCM",                             location: "Johannesburg, South Africa", lat: -26.20, lng: 28.04   },
       { name: "Alan & Sandy White",         ministry: "Bible Translation, Rock International",  location: "Idaho, USA",                 lat: 47.66,  lng: -116.79  },
       { name: "Mika & Fabi Kaltoft",        ministry: "Missionary Family, Scandinavia",         location: "Aarhus, Denmark",            lat: 56.16,  lng: 10.20   },
       { name: "Greg & Sonya Vaughn",        ministry: "Pastor, Valley Church of Christ",        location: "Wasilla, Alaska, USA",       lat: 61.58,  lng: -149.44  },
-      { name: "Jereme & Lindsay Morris",    ministry: "Shepherd's Training Institute",          location: "Cairo, Egypt",               lat: 30.04,  lng: 31.24   },
+      { name: "Jereme & Lindsay Morris",    ministry: "Shepherd's Training Institute",          location: "Egypt",               lat: 30.04,  lng: 31.24   },
       { name: "Erlend & Henriette Hardang", ministry: "Church Plant Pastor",                    location: "Sandefjord, Norway",         lat: 59.13,  lng: 10.22   },
       { name: "Justin & Rebecca Brown",     ministry: "Pastoral Training, Expositor's Academy", location: "Manila, Philippines",        lat: 14.56,  lng: 121.02  },
       { name: "Ricky & Arely Kroeger",      ministry: "Bible Translation, Wycliffe",            location: "Oaxaca, Mexico",             lat: 17.06,  lng: -96.72   },
@@ -174,7 +197,7 @@
     });
 
     map.addControl(new mapboxgl.AttributionControl({ compact: true }));
-    map.scrollZoom.disable();
+    map.scrollZoom.enable();
     map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
 
     map.on('style.load', () => {
