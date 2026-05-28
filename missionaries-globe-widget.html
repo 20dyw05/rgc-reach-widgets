@@ -28,33 +28,48 @@
     }
 
     .section-divider {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.5rem;
+      position: relative;
     }
-    .section-divider::before,
-    .section-divider::after {
-      content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.3);
+    .section-divider-inner {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.35rem;
     }
-    .section-divider span {
-      font-family: Georgia, serif;
-      font-size: 17px;
-      font-weight: 400;
-      letter-spacing: 0.18em;
+    .section-divider-eyebrow {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.9);
-      white-space: nowrap;
-      text-shadow: 0 1px 8px rgba(0,0,0,0.15);
+      color: rgba(255,255,255,0.55);
+    }
+    .section-divider-title {
+      font-family: Georgia, serif;
+      font-size: 42px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.18);
+    }
+    .section-divider-bar {
+      width: 52px;
+      height: 3px;
+      background: rgba(240,160,80,0.85);
+      border-radius: 2px;
+      margin-top: 0.3rem;
+      box-shadow: 0 0 10px rgba(240,160,80,0.4);
     }
 
     .missionaries-intro {
-      text-align: center;
+      text-align: left;
       margin-bottom: 1.75rem;
+      max-width: 720px;
     }
     .missionaries-intro h2 {
       font-family: Georgia, serif;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 400;
       color: #ffffff;
       margin-bottom: 0.85rem;
@@ -72,8 +87,6 @@
       font-size: 15px;
       color: rgba(255,255,255,0.82);
       line-height: 1.85;
-      max-width: 700px;
-      margin: 0 auto;
     }
     .missionaries-intro strong {
       color: #ffffff;
@@ -204,11 +217,17 @@
 </head>
 <body>
 
-  <div class="section-divider"><span>Missionaries</span></div>
+  <div class="section-divider">
+    <div class="section-divider-inner">
+      <span class="section-divider-eyebrow">Redeemer's Grace Church</span>
+      <span class="section-divider-title">Missionaries</span>
+      <div class="section-divider-bar"></div>
+    </div>
+  </div>
 
   <div class="missionaries-intro">
     <h2>We currently support <span class="highlight-number">20+</span> missionaries all throughout the world!</h2>
-    <p>Our vision at RGC is to <strong>know and be involved</strong> in what God is doing in as many parts of the world as possible. We pray for our missionaries regularly through <strong>Missions Matters</strong>, following up to know how we can be praying specifically for them. Paul's ambition in <a href="https://biblia.com/bible/nasb95/romans/15" class="scripture-link" data-biblia-tooltip>Romans 15</a> is to preach Christ where He has not been named — and we want to pray for that same <strong>bold advance</strong>.</p>
+    <p>Our vision at RGC is to <strong>know and be involved</strong> in what God is doing in as many parts of the world as possible. We pray for our missionaries regularly through <strong>Missions Matters</strong>, following up to know how we can be praying specifically for them. Paul's ambition in <a href="https://biblia.com/bible/nasb95/romans/15" class="scripture-link" data-biblia-tooltip>Romans 15</a> is to preach Christ where He has not yet been named, and we want to join that same <strong>bold advance</strong> through prayer.</p>
   </div>
 
   <div id="map-wrap">
@@ -301,7 +320,7 @@
           'fill-opacity': [
             'case',
             ['in', ['get', 'iso_3166_1'], ['literal', uniqueCountries]],
-            0.25,
+            0.06,
             0
           ]
         }
