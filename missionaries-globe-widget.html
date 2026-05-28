@@ -204,15 +204,6 @@
       100% { transform: translate(-50%,-50%) scale(3.5); opacity: 0; }
     }
 
-    /* San Diego origin pin */
-    .sd-pin {
-      width: 14px; height: 14px;
-      background: #ffffff;
-      border-radius: 50%;
-      border: 2.5px solid #f07030;
-      box-shadow: 0 0 8px rgba(240,112,48,0.6);
-    }
-
     /* Mapbox popup overrides */
     .mapboxgl-popup-content {
       border-radius: 14px !important;
@@ -314,7 +305,7 @@
 
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/dark-v11',
+      style: 'mapbox://styles/mapbox/satellite-v9',
       center: [20, 25],
       zoom: 1.6,
       projection: 'globe',
@@ -349,11 +340,11 @@
 
     map.on('style.load', () => {
       map.setFog({
-        color: 'rgb(20, 30, 50)',
-        'high-color': 'rgb(10, 20, 40)',
-        'horizon-blend': 0.06,
-        'space-color': 'rgb(5, 10, 25)',
-        'star-intensity': 0.6
+        color: 'rgb(10, 15, 30)',
+        'high-color': 'rgb(5, 10, 25)',
+        'horizon-blend': 0.08,
+        'space-color': 'rgb(5, 8, 20)',
+        'star-intensity': 0.7
       });
 
       // Highlight missionary countries in navy
@@ -397,87 +388,99 @@
     });
 
     map.on('load', () => {
-      // --- Pulsing markers ---
-      missionaries.forEach((m, i) => {
-        const popup = new mapboxgl.Popup({
-          offset: 25,
-          closeButton: true,
-          maxWidth: '230px'
-        }).setHTML(`
-          <div class="popup-inner">
-            <div class="popup-photo">Photo coming soon</div>
-            <div class="popup-text">
-              <div class="popup-name">${m.name}</div>
-              <div class="popup-location">📍 ${m.location}</div>
-              <div class="popup-ministry">${m.ministry}</div>
+      // --- Markers locked to globe via GeoJSON + canvas pulse ---
+      // Add missionary points as GeoJSON
+      map.addSource('missionaries', {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: missionaries.map(m => ({
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: [m.lng, m.lat] },
+            properties: { name: m.name, location: m.location, ministry: m.ministry }
+          }))
+        }
+      });
+
+      // Outer glow circle
+      map.addLayer({
+        id: 'missionary-glow',
+        type: 'circle',
+        source: 'missionaries',
+        paint: {
+          'circle-radius': 14,
+          'circle-color': '#f07030',
+          'circle-opacity': 0.15,
+          'circle-blur': 1
+        }
+      });
+
+      // Inner dot
+      map.addLayer({
+        id: 'missionary-dot',
+        type: 'circle',
+        source: 'missionaries',
+        paint: {
+          'circle-radius': 6,
+          'circle-color': '#f07030',
+          'circle-opacity': 0.95,
+          'circle-stroke-width': 2,
+          'circle-stroke-color': '#ffffff'
+        }
+      });
+
+      // Pulse animation via radius interpolation
+      let start = null;
+      function animatePulse(ts) {
+        if (!start) start = ts;
+        const elapsed = (ts - start) % 2000;
+        const t = elapsed / 2000;
+        const radius = 6 + t * 16;
+        const opacity = 0.5 * (1 - t);
+        if (map.getLayer('missionary-pulse')) {
+          map.setPaintProperty('missionary-pulse', 'circle-radius', radius);
+          map.setPaintProperty('missionary-pulse', 'circle-opacity', opacity);
+        }
+        requestAnimationFrame(animatePulse);
+      }
+
+      map.addLayer({
+        id: 'missionary-pulse',
+        type: 'circle',
+        source: 'missionaries',
+        paint: {
+          'circle-radius': 6,
+          'circle-color': '#f07030',
+          'circle-opacity': 0.5,
+          'circle-stroke-width': 0
+        }
+      });
+
+      requestAnimationFrame(animatePulse);
+
+      // Popup on click
+      map.on('click', 'missionary-dot', (e) => {
+        const props = e.features[0].properties;
+        const coords = e.features[0].geometry.coordinates.slice();
+        new mapboxgl.Popup({ offset: 20, maxWidth: '230px' })
+          .setLngLat(coords)
+          .setHTML(`
+            <div class="popup-inner">
+              <div class="popup-photo">Photo coming soon</div>
+              <div class="popup-text">
+                <div class="popup-name">${props.name}</div>
+                <div class="popup-location">📍 ${props.location}</div>
+                <div class="popup-ministry">${props.ministry}</div>
+              </div>
             </div>
-          </div>
-        `);
-
-        // Custom pulsing marker element
-        const el = document.createElement('div');
-        el.className = 'pulse-marker';
-        el.innerHTML = '<div class="pulse-ring"></div><div class="pulse-dot"></div>';
-
-        new mapboxgl.Marker(el)
-          .setLngLat([m.lng, m.lat])
-          .setPopup(popup)
+          `)
           .addTo(map);
       });
 
-      // --- Arc lines from San Diego to each missionary ---
-      const sdLng = -117.16, sdLat = 32.72;
+      map.on('mouseenter', 'missionary-dot', () => { map.getCanvas().style.cursor = 'pointer'; });
+      map.on('mouseleave', 'missionary-dot', () => { map.getCanvas().style.cursor = ''; });
 
-      function greatCirclePoints(lng1, lat1, lng2, lat2, steps) {
-        const toRad = d => d * Math.PI / 180;
-        const toDeg = r => r * 180 / Math.PI;
-        const lat1r = toRad(lat1), lng1r = toRad(lng1);
-        const lat2r = toRad(lat2), lng2r = toRad(lng2);
-        const points = [];
-        for (let i = 0; i <= steps; i++) {
-          const f = i / steps;
-          const A = Math.sin((1-f) * Math.PI) / Math.sin(Math.PI);
-          const B = Math.sin(f * Math.PI) / Math.sin(Math.PI);
-          const x = A * Math.cos(lat1r) * Math.cos(lng1r) + B * Math.cos(lat2r) * Math.cos(lng2r);
-          const y = A * Math.cos(lat1r) * Math.sin(lng1r) + B * Math.cos(lat2r) * Math.sin(lng2r);
-          const z = A * Math.sin(lat1r) + B * Math.sin(lat2r);
-          const lat = toDeg(Math.atan2(z, Math.sqrt(x*x + y*y)));
-          const lng = toDeg(Math.atan2(y, x));
-          points.push([lng, lat]);
-        }
-        return points;
-      }
 
-      const arcFeatures = missionaries.map((m, i) => ({
-        type: 'Feature',
-        geometry: {
-          type: 'LineString',
-          coordinates: greatCirclePoints(sdLng, sdLat, m.lng, m.lat, 64)
-        }
-      }));
-
-      map.addSource('arcs', {
-        type: 'geojson',
-        data: { type: 'FeatureCollection', features: arcFeatures }
-      });
-
-      map.addLayer({
-        id: 'arcs-layer',
-        type: 'line',
-        source: 'arcs',
-        paint: {
-          'line-color': '#f07030',
-          'line-width': 1,
-          'line-opacity': 0.25,
-          'line-dasharray': [2, 3]
-        }
-      });
-
-      // San Diego origin pin
-      const sdEl = document.createElement('div');
-      sdEl.className = 'sd-pin';
-      sdEl.title = 'Redeemer\'s Grace Church, San Diego';
-      new mapboxgl.Marker(sdEl).setLngLat([sdLng, sdLat]).addTo(map);
     });
   </script>
   <script>
