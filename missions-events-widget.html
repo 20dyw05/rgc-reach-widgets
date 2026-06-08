@@ -31,7 +31,7 @@
 
     .card {
       display: grid;
-      grid-template-columns: 400px 1fr;
+      grid-template-columns: 42% 1fr;
       border-radius: 12px;
       overflow: hidden;
       background: #ffffff;
@@ -41,7 +41,7 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.12); }
-    .card.reverse { grid-template-columns: 1fr 400px; }
+    .card.reverse { grid-template-columns: 1fr 42%; }
 
     .card-bg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 
@@ -75,11 +75,34 @@
     .divider { width: 28px; height: 2px; border-radius: 2px; background: #c0c0c0; }
     .card-desc { font-size: 16px; color: #555; line-height: 1.7; }
 
-    @media (max-width: 640px) {
-      .card, .card.reverse { grid-template-columns: 1fr; }
+    /* Tablet: stack photo on top, text below */
+    @media (max-width: 860px) {
+      .card, .card.reverse {
+        grid-template-columns: 1fr;
+      }
       .card.reverse .photo-col { order: 0; }
       .card.reverse .card-body { order: 1; }
+      .photo-col {
+        height: 220px;
+        min-height: unset;
+      }
+      .card-body {
+        padding: 1.5rem 1.5rem;
+      }
+      .card-title { font-size: 20px; }
+      .card-desc  { font-size: 14px; }
+    }
+
+    /* Phone */
+    @media (max-width: 480px) {
+      body { padding: 0.75rem 0.75rem 1.5rem; }
+      .cards { gap: 0.85rem; }
+      .card { border-radius: 10px; }
       .photo-col { height: 180px; }
+      .card-body { padding: 1.1rem 1.1rem 1.4rem; }
+      .card-title { font-size: 18px; }
+      .card-desc  { font-size: 13.5px; line-height: 1.7; }
+      .section-divider span { font-size: 13px; }
     }
   </style>
 </head>
