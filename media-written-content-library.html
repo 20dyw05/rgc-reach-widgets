@@ -158,11 +158,11 @@
 let devotionals = [];
 
 // ── Fetch from JSON ──────────────────────────────────────────
-// devotionals.json lives in the same folder as this HTML file
+// written-media-storage.json lives in the same folder as this HTML file
 async function loadDevotionals() {
   document.getElementById('loading').classList.add('visible');
   try {
-    const res = await fetch('devotionals.json');
+    const res = await fetch('written-media-storage.json');
     if (!res.ok) throw new Error('Failed to fetch');
     devotionals = await res.json();
     document.getElementById('loading').classList.remove('visible');
