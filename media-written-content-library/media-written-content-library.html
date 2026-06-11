@@ -242,6 +242,7 @@
   <div class="reader-inner">
     <img id="reader-img" class="reader-hero" src="" alt="" style="display:none;" />
     <h1 class="reader-title" id="reader-title"></h1>
+    <div id="reader-subtitle" style="display:none;font-size:12px;color:#aaa;margin-bottom:0.5rem;font-style:italic;"></div>
     <div class="reader-meta" id="reader-meta"></div>
     <div class="share-row">
       <button class="share-btn" onclick="shareDevotional()">
@@ -423,6 +424,9 @@ function openReader(si, di, pushHash) {
   else { img.style.display = 'none'; }
 
   document.getElementById('reader-title').textContent = d.title;
+  const subtitleEl = document.getElementById('reader-subtitle');
+  if (d.subtitle) { subtitleEl.textContent = d.subtitle; subtitleEl.style.display = 'block'; }
+  else { subtitleEl.style.display = 'none'; }
   document.getElementById('reader-meta').innerHTML =
     `<span>${d.date}</span>${d.author ? `<span class="dot"></span><span>${d.author}</span>` : ''}`;
   document.getElementById('share-toast').classList.remove('visible');
