@@ -17,38 +17,21 @@
 
     /* ── Section label ── */
     .section-eyebrow {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #3a9da8;
-      margin-bottom: 0.4rem;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #3a9da8; margin-bottom: 0.4rem;
     }
     .section-heading {
-      font-size: 22px;
-      font-weight: 700;
-      color: #111;
-      margin-bottom: 1.25rem;
+      font-size: 22px; font-weight: 700; color: #111; margin-bottom: 1.25rem;
     }
 
     /* ── Breadcrumb ── */
     .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      color: #888;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; color: #888; margin-bottom: 1.5rem; flex-wrap: wrap;
     }
     .breadcrumb-link {
-      color: #3a9da8;
-      cursor: pointer;
-      background: none;
-      border: none;
-      font-family: inherit;
-      font-size: inherit;
-      padding: 0;
+      color: #3a9da8; cursor: pointer; background: none; border: none;
+      font-family: inherit; font-size: inherit; padding: 0;
     }
     .breadcrumb-link:hover { text-decoration: underline; }
     .breadcrumb-sep { color: #ccc; }
@@ -67,45 +50,27 @@
     @media (max-width: 900px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .cards-grid { grid-template-columns: 1fr; gap: 1.1rem; } }
 
-    /* ── Card (shared by series and devotionals) ── */
+    /* ── Cards ── */
     .grid-card { cursor: pointer; }
-
     .card-thumb-wrap {
-      width: 100%;
-      aspect-ratio: 16/10;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 0.7rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      transform: translateY(0);
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
-      will-change: transform;
-      position: relative;
+      width: 100%; aspect-ratio: 16/10; border-radius: 10px; overflow: hidden;
+      margin-bottom: 0.7rem; box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      transform: translateY(0); transition: transform 0.22s ease, box-shadow 0.22s ease;
+      will-change: transform; position: relative;
     }
     .card-thumb-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    /* Series placeholder — teal gradient with stack indicator */
     .thumb-series {
       width: 100%; height: 100%;
       background: linear-gradient(160deg, #1a5f6e 0%, #3a9da8 100%);
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column;
-      gap: 8px;
+      display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px;
     }
-    .series-stack-lines {
-      display: flex; flex-direction: column; gap: 5px; align-items: center;
-    }
-    .series-stack-lines span {
-      display: block;
-      height: 3px;
-      background: rgba(255,255,255,0.5);
-      border-radius: 2px;
-    }
+    .series-stack-lines { display: flex; flex-direction: column; gap: 5px; align-items: center; }
+    .series-stack-lines span { display: block; height: 3px; background: rgba(255,255,255,0.5); border-radius: 2px; }
     .series-stack-lines span:nth-child(1) { width: 36px; }
     .series-stack-lines span:nth-child(2) { width: 28px; }
     .series-stack-lines span:nth-child(3) { width: 20px; }
 
-    /* Devotional placeholder — navy gradient with cross */
     .thumb-devo {
       width: 100%; height: 100%;
       background: linear-gradient(160deg, #1a3a6e 0%, #2a5aae 100%);
@@ -114,39 +79,27 @@
     .cross { width: 32px; height: 32px; position: relative; opacity: 0.4; }
     .cross::before, .cross::after { content: ''; position: absolute; background: #fff; border-radius: 2px; }
     .cross::before { width: 4px; height: 100%; left: 50%; transform: translateX(-50%); }
-    .cross::after  { width: 100%; height: 4px; top: 50%;  transform: translateY(-50%); }
+    .cross::after  { width: 100%; height: 4px; top: 50%; transform: translateY(-50%); }
 
-    /* Series badge on card */
     .series-badge {
       position: absolute; bottom: 8px; right: 8px;
-      background: rgba(0,0,0,0.45);
-      backdrop-filter: blur(4px);
-      color: #fff;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 8px;
-      border-radius: 20px;
-      letter-spacing: 0.03em;
+      background: rgba(0,0,0,0.45); backdrop-filter: blur(4px);
+      color: #fff; font-size: 11px; font-weight: 600;
+      padding: 3px 8px; border-radius: 20px; letter-spacing: 0.03em;
     }
 
     .card-title { font-size: 15px; font-weight: 700; color: #111; line-height: 1.3; margin-bottom: 0.25rem; }
     @media (max-width: 560px) { .card-title { font-size: 16px; } }
-
     .card-meta { font-size: 12.5px; color: #888; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
     .dot { width: 3px; height: 3px; background: #bbb; border-radius: 50%; flex-shrink: 0; }
 
-    /* ── Card animation ── */
     @keyframes fadeOut { from { opacity:1; transform:scale(1); } to { opacity:0; transform:scale(0.95); } }
     @keyframes fadeIn  { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
     .grid-card.hiding  { animation: fadeOut 0.2s ease forwards; pointer-events: none; }
     .grid-card.showing { animation: fadeIn  0.2s ease forwards; }
     .grid-card.hidden  { display: none; }
 
-    /* ── State messages ── */
-    .state-msg {
-      text-align: center; color: #aaa; font-size: 14px;
-      padding: 3rem 0; display: none;
-    }
+    .state-msg { text-align: center; color: #aaa; font-size: 14px; padding: 3rem 0; display: none; }
     .state-msg.visible { display: block; }
 
     /* ── Reader ── */
@@ -162,14 +115,31 @@
 
     .reader-inner { max-width: 680px; margin: 0 auto; }
 
-    .reader-img {
-      width: 100%; max-height: 320px; object-fit: cover;
-      border-radius: 10px; margin-bottom: 1.75rem; display: block;
+    .reader-hero {
+      width: 100%; max-height: 340px; object-fit: cover;
+      border-radius: 12px; margin-bottom: 2rem; display: block;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.13);
     }
 
-    .reader-scripture {
-      font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+    /* ── Scripture block ── */
+    .scripture-block {
+      background: #f4fbfc;
+      border-left: 4px solid #3a9da8;
+      border-radius: 0 8px 8px 0;
+      padding: 1.1rem 1.4rem;
+      margin-bottom: 1.75rem;
+    }
+    .scripture-ref {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
       text-transform: uppercase; color: #3a9da8; margin-bottom: 0.5rem;
+    }
+    .scripture-text {
+      font-size: 15.5px; color: #2a5560; line-height: 1.75;
+      font-style: italic;
+    }
+    .scripture-text .verse-num {
+      font-size: 10px; font-weight: 700; vertical-align: super;
+      color: #3a9da8; margin-right: 2px; font-style: normal;
     }
 
     .reader-title {
@@ -179,35 +149,31 @@
     @media (max-width: 560px) { .reader-title { font-size: 22px; } }
 
     .reader-meta {
-      font-size: 13px; color: #888; display: flex;
-      align-items: center; gap: 8px; flex-wrap: wrap;
-      margin-bottom: 1.25rem; padding-bottom: 1.5rem;
+      font-size: 13px; color: #888;
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 1.25rem; padding-bottom: 1.25rem;
       border-bottom: 1px solid #eee;
     }
 
-    /* ── Share button ── */
+    /* ── Share ── */
+    .share-row { display: flex; align-items: center; gap: 10px; margin-bottom: 1.75rem; }
     .share-btn {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 12.5px; color: #3a9da8;
       background: rgba(58,157,168,0.08);
       border: 1px solid rgba(58,157,168,0.25);
-      border-radius: 20px;
-      padding: 5px 12px;
-      cursor: pointer;
-      font-family: inherit;
+      border-radius: 20px; padding: 5px 12px;
+      cursor: pointer; font-family: inherit;
       transition: background 0.15s;
-      margin-bottom: 1.5rem;
     }
     .share-btn:hover { background: rgba(58,157,168,0.15); }
     .share-toast {
-      display: inline-block;
       font-size: 12px; color: #2e8a8f;
-      margin-left: 10px;
-      opacity: 0;
-      transition: opacity 0.2s;
+      opacity: 0; transition: opacity 0.2s; white-space: nowrap;
     }
     .share-toast.visible { opacity: 1; }
 
+    /* ── Reader body ── */
     .reader-body { font-size: 17px; color: #333; line-height: 1.95; }
     @media (max-width: 560px) { .reader-body { font-size: 16px; line-height: 1.85; } }
     .reader-body p { margin-bottom: 1.35rem; }
@@ -220,17 +186,32 @@
       font-size: 16px; line-height: 1.7;
     }
     @media (max-width: 560px) { .reader-body blockquote { font-size: 15px; } }
+
+    /* Consider section */
+    .consider-block {
+      background: #fafafa; border-radius: 10px;
+      padding: 1.25rem 1.5rem; margin-top: 2rem;
+      border: 1px solid #eee;
+    }
+    .consider-block strong {
+      display: block; font-size: 12px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #3a9da8; margin-bottom: 0.85rem;
+    }
+    .consider-block ul { margin: 0 0 0 1.25rem; }
+    .consider-block ul li {
+      font-size: 15.5px; color: #444; line-height: 1.7; margin-bottom: 0.65rem;
+    }
   </style>
 </head>
 <body>
 
-<!-- SERIES / DEVO ARCHIVE -->
+<!-- ARCHIVE -->
 <div id="archive-view">
   <div id="archive-header">
     <div class="section-eyebrow" id="archive-eyebrow">Written Devotionals</div>
     <div class="section-heading" id="archive-heading">Series</div>
   </div>
-
   <div id="breadcrumb-wrap" style="display:none;">
     <div class="breadcrumb">
       <button class="breadcrumb-link" onclick="goHome()">Written Devotionals</button>
@@ -238,21 +219,19 @@
       <span class="breadcrumb-current" id="breadcrumb-series-name"></span>
     </div>
   </div>
-
-  <div class="search-wrap" id="search-wrap" style="display:none;">
+  <div class="search-wrap">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
     </svg>
-    <input id="rgc-search" type="text" placeholder="Search devotionals..."
+    <input id="rgc-search" type="text" placeholder="Search series..."
       oninput="filterCards(this.value)" autocomplete="off"
       style="display:block;width:100%;padding:11px 16px 11px 42px;font-size:15px;font-family:inherit;border:1px solid #e0e0e0;border-radius:8px;outline:none;color:#333;background:#fafafa;box-shadow:none;-webkit-appearance:none;margin:0;line-height:normal;box-sizing:border-box;"
       onfocus="this.style.borderColor='#3a9da8';this.style.boxShadow='0 0 0 3px rgba(58,157,168,0.12)';this.style.background='#fff';"
       onblur="this.style.borderColor='#e0e0e0';this.style.boxShadow='none';this.style.background='#fafafa';"
     />
   </div>
-
   <div class="cards-grid" id="cards-grid"></div>
-  <div class="state-msg" id="no-results">No devotionals found.</div>
+  <div class="state-msg" id="no-results">No results found.</div>
   <div class="state-msg" id="loading">Loading devotionals...</div>
   <div class="state-msg" id="load-error">Could not load devotionals. Please try again later.</div>
 </div>
@@ -261,11 +240,10 @@
 <div id="reader-view">
   <button class="back-btn" id="reader-back-btn" onclick="handleReaderBack()">&#8592; <span id="reader-back-label">Back</span></button>
   <div class="reader-inner">
-    <img id="reader-img" class="reader-img" src="" alt="" style="display:none;" />
-    <div class="reader-scripture" id="reader-scripture"></div>
+    <img id="reader-img" class="reader-hero" src="" alt="" style="display:none;" />
     <h1 class="reader-title" id="reader-title"></h1>
     <div class="reader-meta" id="reader-meta"></div>
-    <div>
+    <div class="share-row">
       <button class="share-btn" onclick="shareDevotional()">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
@@ -275,50 +253,57 @@
       </button>
       <span class="share-toast" id="share-toast">Link copied!</span>
     </div>
+    <div id="reader-scripture-block"></div>
     <div class="reader-body" id="reader-body"></div>
   </div>
 </div>
 
 <script>
 let allSeries = [];
-let currentSeriesIndex = null; // null = showing series grid
-let currentDevoIndex = null;
+let currentSeriesIndex = null;
+// mode: 'series' | 'devos'
+let currentMode = 'series';
 
-// ── Hash routing ─────────────────────────────────────────────
+// ── Scripture verses (keyed by reference, for rich display) ──
+const SCRIPTURE_VERSES = {
+  'Matthew 11:28-30': [
+    { num: 28, text: '"Come to Me, all who are weary and heavy-laden, and I will give you rest.' },
+    { num: 29, text: 'Take My yoke upon you and learn from Me, for I am gentle and humble in heart, and YOU WILL FIND REST FOR YOUR SOULS.' },
+    { num: 30, text: 'For My yoke is easy and My burden is light."' }
+  ],
+  'Romans 8:28-30': [
+    { num: 28, text: 'And we know that God causes all things to work together for good to those who love God, to those who are called according to His purpose.' },
+    { num: 29, text: 'For those whom He foreknew, He also predestined to become conformed to the image of His Son, so that He would be the firstborn among many brethren;' },
+    { num: 30, text: 'and these whom He predestined, He also called; and these whom He called, He also justified; and these whom He justified, He also glorified.' }
+  ]
+};
+
+// ── Hash routing ──────────────────────────────────────────────
 function getHashParts() {
   const h = window.location.hash.replace('#', '');
   if (!h) return { series: null, devo: null };
   const parts = h.split('/');
   return { series: parts[0] || null, devo: parts[1] || null };
 }
-
 function setHash(seriesSlug, devoSlug) {
   const hash = devoSlug ? `#${seriesSlug}/${devoSlug}` : (seriesSlug ? `#${seriesSlug}` : '');
   history.pushState(null, '', window.location.pathname + hash);
 }
-
 function clearHash() {
   history.pushState(null, '', window.location.pathname);
 }
-
 window.addEventListener('popstate', () => {
   const { series, devo } = getHashParts();
-  if (!series) {
-    renderSeriesGrid();
-  } else if (!devo) {
-    const si = allSeries.findIndex(s => s.slug === series);
-    if (si >= 0) renderDevosInSeries(si, false);
-    else renderSeriesGrid();
-  } else {
-    const si = allSeries.findIndex(s => s.slug === series);
-    if (si < 0) { renderSeriesGrid(); return; }
-    const di = allSeries[si].devotionals.findIndex(d => d.slug === devo);
-    if (di >= 0) openReader(si, di, false);
-    else renderDevosInSeries(si, false);
-  }
+  if (!series) { renderSeriesGrid(); return; }
+  const si = allSeries.findIndex(s => s.slug === series);
+  if (si < 0) { renderSeriesGrid(); return; }
+  if (!devo) { renderDevosInSeries(si, false); return; }
+  const di = allSeries[si].devotionals.findIndex(d => d.slug === devo);
+  if (di >= 0) openReader(si, di, false);
+  else renderDevosInSeries(si, false);
 });
 
-// ── Load ─────────────────────────────────────────────────────
+// ── Load ──────────────────────────────────────────────────────
 async function loadDevotionals() {
   document.getElementById('loading').classList.add('visible');
   try {
@@ -326,8 +311,6 @@ async function loadDevotionals() {
     if (!res.ok) throw new Error('Failed to fetch');
     allSeries = await res.json();
     document.getElementById('loading').classList.remove('visible');
-
-    // Route based on hash on first load
     const { series, devo } = getHashParts();
     if (series) {
       const si = allSeries.findIndex(s => s.slug === series);
@@ -347,13 +330,16 @@ async function loadDevotionals() {
 // ── Series grid ───────────────────────────────────────────────
 function renderSeriesGrid() {
   currentSeriesIndex = null;
-  currentDevoIndex = null;
+  currentMode = 'series';
   document.getElementById('archive-view').style.display = 'block';
   document.getElementById('reader-view').style.display = 'none';
   document.getElementById('archive-eyebrow').textContent = 'Written Devotionals';
   document.getElementById('archive-heading').textContent = 'Series';
   document.getElementById('breadcrumb-wrap').style.display = 'none';
-  document.getElementById('search-wrap').style.display = 'none';
+
+  const search = document.getElementById('rgc-search');
+  search.placeholder = 'Search series...';
+  search.value = '';
 
   const grid = document.getElementById('cards-grid');
   grid.innerHTML = allSeries.map((s, i) => `
@@ -369,7 +355,6 @@ function renderSeriesGrid() {
       <div class="card-meta"><span>${s.description}</span></div>
     </div>
   `).join('');
-
   attachHoverEffects();
 }
 
@@ -381,9 +366,8 @@ function openSeries(i) {
 // ── Devotionals in a series ───────────────────────────────────
 function renderDevosInSeries(si, pushHash) {
   currentSeriesIndex = si;
-  currentDevoIndex = null;
+  currentMode = 'devos';
   const series = allSeries[si];
-
   if (pushHash) setHash(series.slug, null);
 
   document.getElementById('archive-view').style.display = 'block';
@@ -392,11 +376,10 @@ function renderDevosInSeries(si, pushHash) {
   document.getElementById('archive-heading').textContent = 'Devotionals';
   document.getElementById('breadcrumb-wrap').style.display = 'block';
   document.getElementById('breadcrumb-series-name').textContent = series.title;
-  document.getElementById('search-wrap').style.display = 'block';
 
-  const searchInput = document.getElementById('rgc-search');
-  searchInput.placeholder = `Search ${series.title} devotionals...`;
-  searchInput.value = '';
+  const search = document.getElementById('rgc-search');
+  search.placeholder = `Search ${series.title} devotionals...`;
+  search.value = '';
 
   const grid = document.getElementById('cards-grid');
   grid.innerHTML = series.devotionals.map((d, di) => `
@@ -414,7 +397,6 @@ function renderDevosInSeries(si, pushHash) {
       </div>
     </div>
   `).join('');
-
   attachHoverEffects();
   window.scrollTo(0, 0);
 }
@@ -427,10 +409,8 @@ function goHome() {
 // ── Reader ────────────────────────────────────────────────────
 function openReader(si, di, pushHash) {
   currentSeriesIndex = si;
-  currentDevoIndex = di;
   const series = allSeries[si];
   const d = series.devotionals[di];
-
   if (pushHash) setHash(series.slug, d.slug);
 
   document.getElementById('archive-view').style.display = 'none';
@@ -441,12 +421,45 @@ function openReader(si, di, pushHash) {
   if (d.image) { img.src = d.image; img.style.display = 'block'; }
   else { img.style.display = 'none'; }
 
-  document.getElementById('reader-scripture').textContent = d.scripture || '';
   document.getElementById('reader-title').textContent = d.title;
   document.getElementById('reader-meta').innerHTML =
     `<span>${d.date}</span><span class="dot"></span><span>${d.author}</span>`;
-  document.getElementById('reader-body').innerHTML = d.body;
   document.getElementById('share-toast').classList.remove('visible');
+
+  // Scripture block
+  const scriptureEl = document.getElementById('reader-scripture-block');
+  if (d.scripture) {
+    const verses = SCRIPTURE_VERSES[d.scripture];
+    let verseHTML = '';
+    if (verses) {
+      verseHTML = verses.map(v =>
+        `<span class="verse-num">${v.num}</span>${v.text} `
+      ).join('');
+    }
+    scriptureEl.innerHTML = `
+      <div class="scripture-block">
+        <div class="scripture-ref">${d.scripture}</div>
+        <div class="scripture-text">${verseHTML || ''}</div>
+      </div>
+    `;
+  } else {
+    scriptureEl.innerHTML = '';
+  }
+
+  // Body — pull out Consider list and render as styled block
+  let body = d.body;
+  const considerMatch = body.match(/<p><strong>Consider:<\/strong><\/p>\s*<ul>([\s\S]*?)<\/ul>/);
+  let considerHTML = '';
+  if (considerMatch) {
+    body = body.replace(considerMatch[0], '');
+    considerHTML = `
+      <div class="consider-block">
+        <strong>Consider</strong>
+        <ul>${considerMatch[1]}</ul>
+      </div>
+    `;
+  }
+  document.getElementById('reader-body').innerHTML = body + considerHTML;
   window.scrollTo(0, 0);
 }
 
@@ -462,61 +475,87 @@ function handleReaderBack() {
 
 // ── Share ─────────────────────────────────────────────────────
 function shareDevotional() {
-  const url = window.location.href;
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(showShareToast);
+  // Build the canonical GitHub Pages URL from the hash
+  const hash = window.location.hash;
+  const base = 'https://20dyw05.github.io/rgc-reach-widgets/media-written-content-library.html';
+  const url = base + hash;
+
+  const toast = document.getElementById('share-toast');
+  const copied = () => {
+    toast.classList.add('visible');
+    setTimeout(() => toast.classList.remove('visible'), 2500);
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(copied).catch(() => fallbackCopy(url, copied));
   } else {
-    // fallback
-    const ta = document.createElement('textarea');
-    ta.value = url;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    document.body.removeChild(ta);
-    showShareToast();
+    fallbackCopy(url, copied);
   }
 }
 
-function showShareToast() {
-  const toast = document.getElementById('share-toast');
-  toast.classList.add('visible');
-  setTimeout(() => toast.classList.remove('visible'), 2200);
+function fallbackCopy(text, cb) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;top:-999px;left:-999px;opacity:0;';
+  document.body.appendChild(ta);
+  ta.focus(); ta.select();
+  try { document.execCommand('copy'); cb(); } catch(e) {}
+  document.body.removeChild(ta);
 }
 
-// ── Filter (within series) ────────────────────────────────────
+// ── Filter ────────────────────────────────────────────────────
 function filterCards(query) {
-  if (currentSeriesIndex === null) return;
   const q = query.toLowerCase().trim();
-  const series = allSeries[currentSeriesIndex];
   const cards = document.querySelectorAll('.grid-card');
 
-  cards.forEach((card, i) => {
-    const d = series.devotionals[i];
-    if (!d) return;
-    const match = !q
-      || d.title.toLowerCase().includes(q)
-      || d.author.toLowerCase().includes(q)
-      || (d.scripture && d.scripture.toLowerCase().includes(q))
-      || (d.body && d.body.toLowerCase().includes(q));
-
-    if (match) {
-      if (card.classList.contains('hidden')) {
-        card.classList.remove('hidden');
-        card.classList.add('showing');
-        setTimeout(() => card.classList.remove('showing'), 220);
-      }
-    } else {
-      if (!card.classList.contains('hidden')) {
-        card.classList.add('hiding');
-        setTimeout(() => { card.classList.remove('hiding'); card.classList.add('hidden'); }, 200);
-      }
-    }
-  });
+  if (currentMode === 'series') {
+    // Filter series cards
+    cards.forEach((card, i) => {
+      const s = allSeries[i];
+      if (!s) return;
+      const match = !q
+        || s.title.toLowerCase().includes(q)
+        || s.description.toLowerCase().includes(q)
+        || s.devotionals.some(d =>
+            d.title.toLowerCase().includes(q) ||
+            (d.scripture && d.scripture.toLowerCase().includes(q))
+          );
+      toggleCard(card, match);
+    });
+  } else {
+    // Filter devotionals in current series
+    const series = allSeries[currentSeriesIndex];
+    cards.forEach((card, i) => {
+      const d = series.devotionals[i];
+      if (!d) return;
+      const match = !q
+        || d.title.toLowerCase().includes(q)
+        || d.author.toLowerCase().includes(q)
+        || (d.scripture && d.scripture.toLowerCase().includes(q))
+        || (d.body && d.body.toLowerCase().includes(q));
+      toggleCard(card, match);
+    });
+  }
 
   setTimeout(() => {
     const stillVisible = [...cards].filter(c => !c.classList.contains('hidden')).length;
     document.getElementById('no-results').style.display = stillVisible === 0 ? 'block' : 'none';
   }, 220);
+}
+
+function toggleCard(card, show) {
+  if (show) {
+    if (card.classList.contains('hidden')) {
+      card.classList.remove('hidden');
+      card.classList.add('showing');
+      setTimeout(() => card.classList.remove('showing'), 220);
+    }
+  } else {
+    if (!card.classList.contains('hidden')) {
+      card.classList.add('hiding');
+      setTimeout(() => { card.classList.remove('hiding'); card.classList.add('hidden'); }, 200);
+    }
+  }
 }
 
 // ── Hover effects ─────────────────────────────────────────────
