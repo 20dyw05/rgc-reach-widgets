@@ -577,10 +577,20 @@ function attachHoverEffects() {
 loadDevotionals();
 
 // ── Auto-resize: report content height to parent iframe ───────
-// Called after every view transition so Subsplash resizes instantly.
-// Uses a short-poll for the first second to catch images/fonts settling.
+// Measures the visible content wrapper directly — NOT body.scrollHeight,
+// which grows to fill the iframe container and causes an infinite loop.
 let _resizeTimer = null;
 let _resizePollTimer = null;
+
+function getContentHeight() {
+  // Measure whichever view is currently visible
+  const archive = document.getElementById('archive-view');
+  const reader  = document.getElementById('reader-view');
+  const el = (reader && reader.style.display !== 'none') ? reader : archive;
+  if (!el) return 0;
+  const rect = el.getBoundingClientRect();
+  return Math.ceil(rect.top + rect.height + 24); // 24px bottom padding
+}
 
 function scheduleResize() {
   clearInterval(_resizePollTimer);
@@ -588,7 +598,7 @@ function scheduleResize() {
   let stableCount = 0;
   let polls = 0;
   _resizePollTimer = setInterval(() => {
-    const h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    const h = getContentHeight();
     if (h === lastH) {
       stableCount++;
     } else {
