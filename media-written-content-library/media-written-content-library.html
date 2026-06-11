@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <base href="https://20dyw05.github.io/rgc-reach-widgets/media-written-content-library/media-written-content-library.html" />
   <title>Written Devotionals</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -308,7 +307,7 @@ window.addEventListener('popstate', () => {
 async function loadDevotionals() {
   document.getElementById('loading').classList.add('visible');
   try {
-    const res = await fetch('devotionals.json');
+    const res = await fetch('https://20dyw05.github.io/rgc-reach-widgets/media-written-content-library/devotionals.json');
     if (!res.ok) throw new Error('Failed to fetch');
     allSeries = await res.json();
     document.getElementById('loading').classList.remove('visible');
@@ -477,9 +476,7 @@ function handleReaderBack() {
 
 // ── Share ─────────────────────────────────────────────────────
 function shareDevotional() {
-  // Build the canonical GitHub Pages URL from the hash
-  const hash = window.location.hash;
-  const base = document.querySelector('base').href.split('#')[0];
+  const base = 'https://20dyw05.github.io/rgc-reach-widgets/media-written-content-library/media-written-content-library.html';
   const url = base + window.location.hash;
 
   const toast = document.getElementById('share-toast');
