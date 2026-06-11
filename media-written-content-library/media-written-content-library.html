@@ -582,21 +582,21 @@ loadDevotionals();
 let _resizeTimer = null;
 let _resizePollTimer = null;
 
-function reportHeight() {
-  // document.body.scrollHeight is the most reliable cross-browser measure
-  const h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-  window.parent.postMessage({ rgcFrameHeight: h }, '*');
-}
-
 function scheduleResize() {
-  // Immediate report
-  reportHeight();
-  // Then poll for 1.2s to catch images loading / animations finishing
   clearInterval(_resizePollTimer);
+  let lastH = 0;
+  let stableCount = 0;
   let polls = 0;
   _resizePollTimer = setInterval(() => {
-    reportHeight();
-    if (++polls >= 6) clearInterval(_resizePollTimer); // 6 × 200ms = 1.2s
+    const h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    if (h === lastH) {
+      stableCount++;
+    } else {
+      stableCount = 0;
+      lastH = h;
+      window.parent.postMessage({ rgcFrameHeight: h }, '*');
+    }
+    if (stableCount >= 2 || ++polls >= 10) clearInterval(_resizePollTimer);
   }, 200);
 }
 
@@ -611,7 +611,7 @@ openReader = function(si, di, push) { _origOpenReader(si, di, push); scheduleRes
 // Also fire on window resize (orientation change, sidebar collapse, etc.)
 window.addEventListener('resize', () => {
   clearTimeout(_resizeTimer);
-  _resizeTimer = setTimeout(reportHeight, 150);
+  _resizeTimer = setTimeout(scheduleResize, 150);
 });
 
 // Initial report after fonts/images have a moment to settle
