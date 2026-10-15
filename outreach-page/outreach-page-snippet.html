@@ -1,0 +1,136 @@
+<!-- RGC Outreach page: paste this whole block into ONE Subsplash code block -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  .rgc-outreach, .rgc-outreach * { box-sizing: border-box; }
+  .rgc-outreach { font-family: 'Cormorant Garamond', Georgia, serif; margin: 0; padding: 0; width: 100%; color: #2a2a2a; }
+  .rgc-outreach a { color: #1d7080; text-decoration: none; }
+  .rgc-outreach a:hover { color: #f07030; }
+
+  /* Title card */
+  .rgc-outreach .rgc-hero {
+    position: relative; overflow: hidden; color: #fff; text-align: center;
+    padding: 96px 28px 190px; margin: 0;
+    background: #3a4446 url("https://20dyw05.github.io/rgc-reach-widgets/outreach-widgets/media/outreach-title-photo.jpg") center / cover no-repeat;
+  }
+  .rgc-outreach .rgc-hero::before {
+    content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(20,34,38,0.42) 0%, rgba(20,34,38,0.18) 55%, rgba(20,34,38,0.05) 100%);
+  }
+  .rgc-outreach .rgc-title {
+    position: relative; margin: 0; padding: 0; text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; font-size: clamp(38px, 6vw, 64px); line-height: 1;
+    text-transform: uppercase; color: #fff; text-shadow: 0 1px 18px rgba(0,0,0,0.25);
+  }
+  .rgc-outreach .rgc-title-word {
+    display: inline-block; letter-spacing: 0.42em; margin-right: -0.42em;
+    padding: 0 calc(118px + 0.42em) 0 118px;
+    background:
+      linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)) left center / 90px 1px no-repeat,
+      linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)) right 0.42em center / 90px 1px no-repeat;
+  }
+
+  /* Mission statement */
+  .rgc-outreach .rgc-band { background: #f3efe7; padding: 76px 28px 84px; margin: 0; }
+  .rgc-outreach .rgc-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+  .rgc-outreach .rgc-h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: 46px; line-height: 1.1; color: #1a1a1a; margin: 0; padding: 0; text-transform: none; letter-spacing: 0; }
+  .rgc-outreach .rgc-accent { width: 52px; height: 2px; background: #f07030; margin: 20px auto 0; font-size: 0; line-height: 0; }
+  .rgc-outreach .rgc-verse { font-style: italic; font-size: 26px; line-height: 1.5; color: #3d3d3d; margin: 24px auto 0; max-width: 640px; text-wrap: pretty; }
+  .rgc-outreach .rgc-ref { font-size: 15px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; color: #1d7080; margin-top: 12px; }
+  .rgc-outreach .rgc-body { margin-top: 30px; padding-top: 30px; border-top: 1px solid #d8cfbd; }
+  .rgc-outreach .rgc-body p, .rgc-outreach .rgc-text { font-size: 21px; font-weight: 500; line-height: 1.65; color: #3b372f; margin: 0 0 18px; text-wrap: pretty; }
+  .rgc-outreach .rgc-body p:last-child { margin-bottom: 0; }
+
+  /* Get involved */
+  .rgc-outreach .rgc-events { max-width: 1180px; margin: 0 auto; padding: 84px 28px 88px; }
+  .rgc-outreach .rgc-events .rgc-h2 { text-align: center; }
+  .rgc-outreach .rgc-events .rgc-accent { margin-bottom: 52px; }
+  .rgc-outreach .rgc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
+  .rgc-outreach .rgc-card { margin: 0; }
+  .rgc-outreach .rgc-photo { aspect-ratio: 4 / 3; border-radius: 4px; overflow: hidden; background: #e6e0d4; }
+  .rgc-outreach .rgc-photo img { width: 100%; height: 100%; object-fit: cover; display: block; margin: 0; }
+  .rgc-outreach .rgc-tag { font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; color: #f07030; margin: 22px 0 6px; }
+  .rgc-outreach .rgc-h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 32px; line-height: 1.15; color: #1a1a1a; margin: 0 0 12px; text-transform: none; letter-spacing: 0; }
+  .rgc-outreach .rgc-card p { font-size: 19px; font-weight: 500; line-height: 1.6; color: #45413a; margin: 0; text-wrap: pretty; }
+
+  /* Reach ministry */
+  .rgc-outreach .rgc-reach { background: #f3efe7; padding: 76px 28px 84px; margin: 0; }
+  .rgc-outreach .rgc-reach .rgc-text { margin-top: 26px; }
+  .rgc-outreach .rgc-btn {
+    display: inline-block; margin-top: 12px; padding: 14px 38px; border-radius: 3px;
+    font-family: Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    background: #f07030; color: #fff !important;
+  }
+  .rgc-outreach .rgc-btn:hover { background: #d95d20; color: #fff !important; }
+
+  @media (max-width: 600px) {
+    .rgc-outreach .rgc-hero { padding: 64px 20px 130px; }
+    .rgc-outreach .rgc-title-word {
+      letter-spacing: 0.3em; margin-right: -0.3em; padding: 0 calc(48px + 0.3em) 0 48px;
+      background:
+        linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)) left center / 32px 1px no-repeat,
+        linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)) right 0.3em center / 32px 1px no-repeat;
+    }
+    .rgc-outreach .rgc-band, .rgc-outreach .rgc-reach { padding: 52px 22px 58px; }
+    .rgc-outreach .rgc-events { padding: 56px 22px 60px; }
+    .rgc-outreach .rgc-h2 { font-size: 36px; }
+    .rgc-outreach .rgc-verse { font-size: 22px; }
+    .rgc-outreach .rgc-body p, .rgc-outreach .rgc-text { font-size: 19px; }
+    .rgc-outreach .rgc-h3 { font-size: 28px; }
+  }
+</style>
+<div class="rgc-outreach">
+
+  <div class="rgc-hero">
+    <div class="rgc-title"><span class="rgc-title-word">Outreach</span></div>
+  </div>
+
+  <div class="rgc-band">
+    <div class="rgc-inner">
+      <div class="rgc-h2">A Heart for the Lost</div>
+      <div class="rgc-accent">&nbsp;</div>
+      <div class="rgc-verse">“For the Son of Man has come to seek and to save that which was lost.”</div>
+      <div class="rgc-ref">Luke 19:10</div>
+      <div class="rgc-body">
+        <p>Christ came to seek and to save the lost, and He calls His people to share that same heart. The need for truth in the streets of San Diego is ever-present, and the harvest ever-plentiful. While our missions teams carry the gospel to the nations, the mission of the Great Commission continues right here at home.</p>
+        <p>How will lost souls learn of the gospel if there is no one to preach it to them? Through our Reach Ministry, we go out together to our city, our neighborhoods, and our college campuses so that the gospel is preached, people are loved, and souls are won for Christ.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="rgc-events">
+    <div class="rgc-h2">Get Involved</div>
+    <div class="rgc-accent">&nbsp;</div>
+    <div class="rgc-grid">
+      <div class="rgc-card">
+        <div class="rgc-photo"><img src="https://20dyw05.github.io/rgc-reach-widgets/outreach-widgets/media/project-proclaim.png" alt="Project Proclaim"></div>
+        <div class="rgc-tag">Open-Air Evangelism</div>
+        <div class="rgc-h3">Project Proclaim</div>
+        <p>Project Proclaim takes the gospel to the streets of downtown San Diego through open-air preaching, one-on-one evangelism, and handing out Gospel tracts, followed by food and fellowship. Our most recent Project Proclaim brought the hope of Christ to the thousands gathered at San Diego Comic-Con, complete with limited edition Gospel Comic Tracts!</p>
+      </div>
+      <div class="rgc-card">
+        <div class="rgc-photo"><img src="https://20dyw05.github.io/rgc-reach-widgets/outreach-widgets/media/winning-neighbors.png" alt="Winning Our Neighbors"></div>
+        <div class="rgc-tag">Neighborhood</div>
+        <div class="rgc-h3">Winning Our Neighbors</div>
+        <p>Winning Our Neighbors sends teams out into the neighborhoods of San Diego to share the gospel door to door. Just as the Lord has borne fruit on the college campus, we are eager to see how He will work in our own neighborhood, so that the gospel is preached, our neighbors are loved, and their souls are won for Christ.</p>
+      </div>
+      <div class="rgc-card">
+        <div class="rgc-photo"><img src="https://20dyw05.github.io/rgc-reach-widgets/outreach-widgets/media/homefield-2026.png" alt="Homefield Missions"></div>
+        <div class="rgc-tag">Short-Term Missions</div>
+        <div class="rgc-h3">Homefield Missions</div>
+        <p>Homefield Missions is our evangelism-focused short-term missions trip right here in San Diego. For a whole week during SDSU's Welcome Week, our team lives in together, shares meals and fellowship, and boldly reaches the campus through flyering, Welcome Week events, and evangelism. This year's theme is “Mighty in Spirit” (Aug 23–29, 2026).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="rgc-reach">
+    <div class="rgc-inner">
+      <div class="rgc-h2">Reach Ministry</div>
+      <div class="rgc-accent">&nbsp;</div>
+      <div class="rgc-text">Our outreach events are led by RGC's Reach Ministry. Will you answer the call and join the Lord as His fellow worker in the field? For more information, contact Victor at <a href="mailto:reach@rgcsd.com">reach@rgcsd.com</a>.</div>
+      <a class="rgc-btn" href="mailto:reach@rgcsd.com">Contact Reach</a>
+    </div>
+  </div>
+
+</div>
