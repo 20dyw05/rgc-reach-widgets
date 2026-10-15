@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RGC Outreach — Title</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #3a4446; }
+  .hero {
+    position: relative; overflow: hidden; color: #fff; text-align: center;
+    padding: 96px 28px 190px;
+    background: #3a4446 url("outreach-hero.jpg") center / cover no-repeat;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(20,34,38,0.42) 0%, rgba(20,34,38,0.18) 55%, rgba(20,34,38,0.05) 100%);
+  }
+  .title { position: relative; display: flex; align-items: center; justify-content: center; gap: 28px; }
+  .rule { flex: 0 1 90px; height: 1px; background: rgba(255,255,255,0.85); }
+  h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+    font-size: clamp(38px, 6vw, 64px); line-height: 1;
+    letter-spacing: 0.42em; margin: 0 -0.42em 0 0;
+    text-transform: uppercase; color: #fff;
+    text-shadow: 0 1px 18px rgba(0,0,0,0.25);
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 64px 20px 130px; }
+    .title { gap: 16px; }
+    .rule { flex-basis: 36px; }
+    h1 { letter-spacing: 0.3em; margin-right: -0.3em; }
+  }
+</style>
+</head>
+<body>
+  <section class="hero">
+    <div class="title">
+      <span class="rule"></span>
+      <h1>Outreach</h1>
+      <span class="rule"></span>
+    </div>
+  </section>
+<script>
+  function postHeight() {
+    parent.postMessage({ type: 'rgc-widget-height', widget: 'outreach-title', height: document.documentElement.scrollHeight }, '*');
+  }
+  window.addEventListener('load', postHeight);
+  window.addEventListener('resize', postHeight);
+  if (document.fonts) document.fonts.ready.then(postHeight);
+</script>
+</body>
+</html>
