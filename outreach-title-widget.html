@@ -13,14 +13,14 @@
   .hero {
     position: relative; overflow: hidden; color: #fff; text-align: center;
     padding: 96px 28px 190px;
-    background: #3a4446 url("outreach-hero.jpg") center / cover no-repeat;
+    background: #3a4446 url("https://20dyw05.github.io/rgc-reach-widgets/outreach-hero.jpg") center / cover no-repeat;
   }
   .hero::before {
     content: ""; position: absolute; inset: 0; pointer-events: none;
     background: linear-gradient(180deg, rgba(20,34,38,0.42) 0%, rgba(20,34,38,0.18) 55%, rgba(20,34,38,0.05) 100%);
   }
   .title { position: relative; display: flex; align-items: center; justify-content: center; gap: 28px; }
-  .rule { flex: 0 1 90px; height: 1px; background: rgba(255,255,255,0.85); }
+  .rule { display: block; flex: 0 0 auto; width: 90px; height: 1px; background: #fff; opacity: 0.85; }
   h1 {
     font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
     font-size: clamp(38px, 6vw, 64px); line-height: 1;
@@ -31,7 +31,7 @@
   @media (max-width: 600px) {
     .hero { padding: 64px 20px 130px; }
     .title { gap: 16px; }
-    .rule { flex-basis: 36px; }
+    .rule { width: 36px; }
     h1 { letter-spacing: 0.3em; margin-right: -0.3em; }
   }
 </style>
